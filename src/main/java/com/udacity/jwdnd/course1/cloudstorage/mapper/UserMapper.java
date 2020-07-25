@@ -10,10 +10,10 @@ public interface UserMapper {
     @Select("SELECT * FROM USERS")
     List<User> getUsers();
 
-    @Select("SELECT * FROM USERS WHERE username = #{username}")
+    @Select("SELECT * FROM USERS WHERE username=#{username}")
     User getUser(String username);
 
-    @Insert("INSERT INTO USERS (username, salt, password, firstname, lastname) VALUES(#{username}, #{salt}, #{password}, #{firstName}, #{lastName})")
+    @Insert("INSERT INTO USERS (username, salt, password, firstname, lastname) VALUES (#{username}, #{salt}, #{password}, #{firstName}, #{lastName})")
     @Options(useGeneratedKeys = true, keyProperty = "userId")
     int insertUser(User user);
 
@@ -21,5 +21,5 @@ public interface UserMapper {
     void updateUser(User user);
 
     @Delete("DELETE FROM USERS WHERE userId=#{userId}")
-    void deleteUser(Integer userId);
+    void deleteUser(int userId);
 }
