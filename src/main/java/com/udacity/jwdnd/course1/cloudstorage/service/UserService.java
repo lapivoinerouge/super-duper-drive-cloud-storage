@@ -29,4 +29,16 @@ public class UserService {
         String hashedPassword = hashService.getHashedValue(user.getPassword(), encodedSalt);
         return mapper.insertUser(new User(null, user.getUsername(), user.getPassword(), encodedSalt, user.getFirstName(), user.getLastName()));
     }
+
+    public User getUser(String username) {
+        return mapper.getUser(username);
+    }
+
+    public void updateUser(User user) {
+        mapper.updateUser(user);
+    }
+
+    public void deleteUser(Integer userId) {
+        mapper.deleteUser(userId);
+    }
 }
