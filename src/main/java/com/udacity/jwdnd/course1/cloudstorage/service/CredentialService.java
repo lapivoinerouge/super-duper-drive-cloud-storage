@@ -1,6 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.service;
 
-import com.udacity.jwdnd.course1.cloudstorage.entity.Credential;
+import com.udacity.jwdnd.course1.cloudstorage.entity.Credentials;
 import com.udacity.jwdnd.course1.cloudstorage.mapper.CredentialMapper;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -21,24 +21,24 @@ public class CredentialService {
         this.userService = userService;
     }
 
-    public List<Credential> getUserCredentials(Integer userId) {
+    public List<Credentials> getUserCredentials(Integer userId) {
         return mapper.getUserCredentials(userId);
     }
 
-    public Credential getCredentialsById(Integer credentialId) {
+    public Credentials getCredentialsById(Integer credentialId) {
         return mapper.getCredentialsById(credentialId);
     }
 
-    public Integer saveCredentials(Credential credential) {
+    public Integer saveCredentials(Credentials credentials) {
         String key = RandomStringUtils.random(16, true, true);
-        String encryptedPassword = encryptionService.encryptValue(credential.getPassword(), key);
-        credential.setKey(key);
-        credential.setPassword(encryptedPassword);
-        return mapper.insertCredentials(credential);
+        String encryptedPassword = encryptionService.encryptValue(credentials.getPassword(), key);
+        credentials.setKey(key);
+        credentials.setPassword(encryptedPassword);
+        return mapper.insertCredentials(credentials);
     }
 
-    public void editCredentials(Credential credential) {
-        mapper.updateCredentials(credential);
+    public void editCredentials(Credentials credentials) {
+        mapper.updateCredentials(credentials);
     }
 
     public void deleteCredentials(Integer credentialId) {
@@ -46,8 +46,8 @@ public class CredentialService {
     }
 
     public String decryptCredentials(Integer credentialId) {
-        Credential credential = mapper.getCredentialsById(credentialId);
-        String decryptedPassword = encryptionService.decryptValue(credential.getPassword(), credential.getKey());
+        Credentials credentials = mapper.getCredentialsById(credentialId);
+        String decryptedPassword = encryptionService.decryptValue(credentials.getPassword(), credentials.getKey());
         return decryptedPassword;
     }
 }

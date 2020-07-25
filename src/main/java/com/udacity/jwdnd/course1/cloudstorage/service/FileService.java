@@ -1,6 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.service;
 
-import com.udacity.jwdnd.course1.cloudstorage.entity.File;
+import com.udacity.jwdnd.course1.cloudstorage.entity.Files;
 import com.udacity.jwdnd.course1.cloudstorage.mapper.FileMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,29 +16,29 @@ public class FileService {
         this.mapper = mapper;
     }
 
-    public List<File> getUserFiles(Integer userId) {
+    public List<Files> getUserFiles(Integer userId) {
         return mapper.getFiles(userId);
     }
 
-    public File getFileById(Integer fileId) {
+    public Files getFileById(Integer fileId) {
         return mapper.getFileById(fileId);
     }
 
     public Integer uploadFile(MultipartFile multipartFile, Integer userId) {
-        File file = new File();
+        Files files = new Files();
         try {
-            file.setFileName(multipartFile.getOriginalFilename());
-            file.setContentType(multipartFile.getContentType());
-            file.setFileSize(multipartFile.getSize());
-            file.setUserId(userId);
-            file.setFileData(multipartFile.getBytes());
+            files.setFileName(multipartFile.getOriginalFilename());
+            files.setContentType(multipartFile.getContentType());
+            files.setFileSize(multipartFile.getSize());
+            files.setUserId(userId);
+            files.setFileData(multipartFile.getBytes());
         } catch (IOException e) {
         }
-        return mapper.insertFile(file);
+        return mapper.insertFile(files);
     }
 
-    public void editFileName(File file) {
-        mapper.updateFile(file);
+    public void editFileName(Files files) {
+        mapper.updateFile(files);
     }
 
     public void deleteFile(Integer fileId) {

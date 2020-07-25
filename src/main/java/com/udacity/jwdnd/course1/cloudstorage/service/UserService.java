@@ -1,6 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.service;
 
-import com.udacity.jwdnd.course1.cloudstorage.entity.User;
+import com.udacity.jwdnd.course1.cloudstorage.entity.Users;
 import com.udacity.jwdnd.course1.cloudstorage.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
@@ -21,21 +21,21 @@ public class UserService {
         return mapper.getUser(username) == null;
     }
 
-    public int createUser(User user) {
+    public int createUser(Users users) {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);
         String encodedSalt = Base64.getEncoder().encodeToString(salt);
-        String hashedPassword = hashService.getHashedValue(user.getPassword(), encodedSalt);
-        return mapper.insertUser(new User(null, user.getUsername(), user.getPassword(), encodedSalt, user.getFirstName(), user.getLastName()));
+        String hashedPassword = hashService.getHashedValue(users.getPassword(), encodedSalt);
+        return mapper.insertUser(new Users(null, users.getUsername(), users.getPassword(), encodedSalt, users.getFirstName(), users.getLastName()));
     }
 
-    public User getUser(String username) {
+    public Users getUser(String username) {
         return mapper.getUser(username);
     }
 
-    public void updateUser(User user) {
-        mapper.updateUser(user);
+    public void updateUser(Users users) {
+        mapper.updateUser(users);
     }
 
     public void deleteUser(Integer userId) {

@@ -1,15 +1,15 @@
 package com.udacity.jwdnd.course1.cloudstorage.entity;
 
-public class Note {
+public class Notes {
     private Integer noteId;
     private String noteTitle;
     private String noteDescription;
     private Integer userId;
 
-    public Note() {
+    public Notes() {
     }
 
-    public Note(Integer noteId, String noteTitle, String noteDescription, Integer userId) {
+    public Notes(Integer noteId, String noteTitle, String noteDescription, Integer userId) {
         this.noteId = noteId;
         this.noteTitle = noteTitle;
         this.noteDescription = noteDescription;
