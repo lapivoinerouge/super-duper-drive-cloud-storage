@@ -7,11 +7,11 @@ import java.util.List;
 
 @Mapper
 public interface NoteMapper {
-    @Select("SELECT * FROM NOTES")
-    List<Note> getNotes();
+    @Select("SELECT * FROM NOTES WHERE userId=#{userId}")
+    List<Note> getUserNotes(int userId);
 
     @Select("SELECT * FROM NOTES WHERE noteId=#{noteId}")
-    Note getNote(int noteId);
+    Note getNoteById(int noteId);
 
     @Insert("INSERT INTO NOTES (noteTitle, noteDescription, userId) VALUES (#{noteTitle}, #{noteDescription}, #{userId})")
     @Options(useGeneratedKeys = true, keyProperty = "noteId")
